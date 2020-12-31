@@ -72,7 +72,11 @@ class Controller{
     static renderAccounts(req, res){
         const id = +req.params.idCustomer
         Customer.findByPk(id,{
-            include: [Account]
+            include: [Account],
+            order: [
+                [Account, 'type', 'ASC'],
+                [Account, 'accountNumber', 'ASC']
+            ]
         })
         .then(data => res.render('form-account', {data, currencyFormat}))
         .catch(err => res.send(err))
@@ -126,8 +130,8 @@ class Controller{
     static handleTransfer(req, res){
         let idCustomer = +req.params.idCustomer
         let idAccount = +req.params.idAccount
-        let idReceiver = +req.body.idReceiver
-        let amount = +req.body.amount
+        let idReceiver = req.body.idReceiver === undefined ? idAccount : +req.body.idReceiver
+        let amount = req.body.amount === undefined ? 0 : +req.body.amount 
 
         Account.findByPk(idAccount)
         .then(data => {
