@@ -1,0 +1,52 @@
+<%- include('partials/header', {title: "Accounts"});-%>
+
+<h2 class="mb-3">Good Day, <%= data.fullName %></h2>
+<div class="d-flex justify-content-between">
+  <div>
+    <table class="table table-hover rounded overflow-hidden border shadow">
+      <thead >
+        <tr>
+          <th scope="col" class="pr-3">No</th>
+          <th scope="col" class="pr-3">Account Number</th>
+          <th scope="col" class="pr-3">Type</th>
+          <th scope="col" class="pr-3">Balance</th>
+          <th scope="col" class="pr-3">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (data.Accounts) { %>
+          <% data.Accounts.forEach( (el, indx) => { %>
+            <tr>
+              <th scope="row"><%= indx+1 %></th>
+              <td><%= el.accountNumber%></td>
+              <td><%= el.type %></td>
+              <td><%= currencyFormat(el.balance) %></td>
+              <td><a href="/customers/<%= data.id%>/accounts/<%= el.id %>/transfer">Transfer</a></td>
+            </tr>
+            <% }) %>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+  <div class="border rounded shadow px-5 pt-3 pb-5 h-75">
+    <h4 class="text-center p-2">Add Account</h4>
+    <form action="/customers/<%= data.id%>/accounts" method="POST">
+      <div class="form-group">
+        <label>Account Type</label>
+        <select class="form-control" name="type">
+          <option selected disabled>--Please Select Account Type--</option>
+          <option value="On Account">On Account</option>
+          <option value="Xtra Payroll">Xtra Payroll</option>
+          <option value="Tabunganku">Tabunganku</option>
+        </select>
+      </div> 
+      <div class="form-group">
+        <label>Balance</label>
+        <input type="number" class="form-control" name="balance" placeholder="0">
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Add Account</button>
+    </form>
+  </div>
+</div>
+
+<%- include('partials/footer');-%>
