@@ -1,0 +1,25 @@
+<%- include('partials/header', {title: "Customers"});-%>
+
+<a href="customers/register" class="btn btn-primary m-3 float-right">Register (New Customer)</a>
+<table class="table table-hover border rounded overflow-hidden shadow">
+  <thead>
+    <tr>
+      <th scope="col">No</th>
+      <th scope="col">Identity Number</th>
+      <th scope="col">Full Name</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% data.forEach( (el, indx) => { %>
+      <tr>
+          <th scope="row"><%= indx+1 %></th>
+          <td><%= el.identityNumber%></td>
+          <td><%= el.fullName %></td>
+          <td><a href="customers/<%= el.id %>/accounts">View Account</a> ||  <a href="customers/<%= el.id%>/editProfile">Edit Profil</a></td>
+      </tr>
+      <% }) %>
+  </tbody>
+</table>
+
+<%- include('partials/footer');-%>
