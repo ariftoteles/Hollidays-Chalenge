@@ -12,12 +12,16 @@ class Controller{
         Customer.findAll({
             order: [['fullName','ASC']]
         })
-        .then(data => res.render('customers', {data}))
+        .then(data => {
+            res.render('customers', {data})
+            // res.send(data)
+        }) 
         .catch(err => res.send(err))
     }
 
     static renderRegister(req, res){
-        res.render('form-register')
+        let errors
+        res.render('form-register',{errors})
     }
 
     static handleRegister(req, res){

@@ -20,7 +20,7 @@
               <th scope="row"><%= indx+1 %></th>
               <td><%= el.accountNumber%></td>
               <td><%= el.type %></td>
-              <td><%= currencyFormat(el.balance) %></td>
+              <td class="text-truncate" style="max-width: 220px;"><%= currencyFormat(el.balance) %></td>
               <td><a href="/customers/<%= data.id%>/accounts/<%= el.id %>/transfer">Transfer</a></td>
             </tr>
             <% }) %>
