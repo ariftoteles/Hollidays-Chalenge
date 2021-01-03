@@ -1,4 +1,5 @@
 'use strict';
+const generateAccountNumber = require('../helper/generateAccountNumber')
 const {
   Model
 } = require('sequelize');
@@ -48,7 +49,7 @@ module.exports = (sequelize, DataTypes) => {
     hooks:{
       beforeCreate: (instance) => {
         if(!instance.accountNumber){
-          instance.accountNumber = String(new Date().valueOf()).split('').splice(3).join('')
+          instance.accountNumber = generateAccountNumber()
         }
         if(!instance.balance){
           instance.balance = 500000

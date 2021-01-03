@@ -1,11 +1,11 @@
 <%- include('partials/header', {title: "Transfer"});-%>
 
 <div class="border rounded shadow px-5 pt-3 pb-5 h-75">
-  <h3>Transfer from: 
+  <h4>Transfer from: 
     <span class="font-weight-bold">
         <%= account.accountNumber%> <%= account.type%> <%= currencyFormat(account.balance)%>
     </span>
-  </h3>
+  </h4>
   <form action="/customers/<%= account.Customer.id%>/accounts/<%= account.id%>/transfer" method="POST">
     <div class="form-group">
       <div class="form-group">
